@@ -1,24 +1,21 @@
 import * as React from "react";
-import { atomFamily, useRecoilValue } from "recoil";
-import { ITodo } from "../types/Todo";
-export const todoStateFamily = atomFamily({
-  key: "todo",
-  default: {
-    description: "",
-    done: false,
-  },
-});
+import { useRecoilValue, useRecoilCallback } from "recoil";
+import { todosFamily, todosIDs } from "../atoms";
 
 interface Props {
-  todo: ITodo;
-  toggleTodo: Function;
-  id: Number;
+  id: string;
 }
 
-export const Todo = ({ todo, toggleTodo, id }: Props) => {
+export const Todo = ({ id }: Props) => {
+  const todo = useRecoilValue(todosFamily(id));
+  const removeTodo = useRecoilCallback(({ set }) => (todoID: string) => {
+    set(todosIDs, (currVal) => {
+      return currVal.filter((x) => x !== todoID);
+    });
+  });
   return (
-    <li onClick={() => toggleTodo(id)}>
-      {todo.description} {todo.done.toString()}
+    <li>
+      {todo.description} <button onClick={() => removeTodo(id)}>-</button>
     </li>
   );
 };

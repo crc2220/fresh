@@ -1,32 +1,13 @@
 import * as React from "react";
-import { useSetRecoilState } from "recoil";
-import { todosState } from "../atoms";
+import { useRecoilValue } from "recoil";
 import { Todo } from "./Todo";
-import { ITodo } from "../types/Todo";
-interface Props {
-  todos: ITodo[];
-}
-export const Todos = ({ todos }: Props) => {
-  const setTodos = useSetRecoilState(todosState);
-
-  const toggleTodo = (id: number) => {
-    const newTodos = todos.map((todo, index) => {
-      if (index == id) {
-        todo = {
-          ...todo,
-          done: !todo.done,
-        };
-      }
-      return todo;
-    });
-    setTodos(newTodos);
-  };
+import { todosIDs } from "../atoms";
+export const Todos = () => {
+  const todos = useRecoilValue(todosIDs);
   return (
     <ul>
-      {todos.map((todo, index) => {
-        return (
-          <Todo toggleTodo={toggleTodo} todo={todo} key={index} id={index} />
-        );
+      {todos.map((id, index) => {
+        return <Todo id={id} key={index} />;
       })}
     </ul>
   );

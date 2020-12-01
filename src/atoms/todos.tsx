@@ -1,8 +1,11 @@
-import { atom } from "recoil";
-export const todosState = atom({
+import { atom, atomFamily } from "recoil";
+
+export const todosFamily = atomFamily({
   key: "todos",
-  default: [
-    { description: "do this today", done: false },
-    { description: "do this now", done: true },
-  ],
+  default: { description: "", id: "" },
+});
+
+export const todosIDs = atom({
+  key: "todosIDs",
+  default: [],
 });
