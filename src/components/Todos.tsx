@@ -7,7 +7,7 @@ export const Todos = () => {
   return (
     <ul>
       {todos.map((id, index) => {
-        return <Todo id={id} key={index} />;
+        return <Todo id={id} key={id} />;
       })}
     </ul>
   );

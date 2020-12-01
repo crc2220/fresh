@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useRecoilValue, useRecoilCallback } from "recoil";
-import { todosFamily, todosIDs } from "../atoms";
+import { todosFamily, todosIDs, currentTodo } from "../atoms";
 
 interface Props {
   id: string;
@@ -8,14 +8,24 @@ interface Props {
 
 export const Todo = ({ id }: Props) => {
   const todo = useRecoilValue(todosFamily(id));
-  const removeTodo = useRecoilCallback(({ set }) => (todoID: string) => {
-    set(todosIDs, (currVal) => {
-      return currVal.filter((x) => x !== todoID);
-    });
+  const removeTodo = useRecoilCallback(
+    ({ set, snapshot }) => (todoID: string) => {
+      set(todosIDs, (currVal) => {
+        return currVal.filter((x) => x !== todoID);
+      });
+      const _currentTodo = snapshot.getLoadable(currentTodo).contents;
+      if (_currentTodo === todoID) {
+        set(currentTodo, (currVal) => null);
+      }
+    }
+  );
+  const setCurrentTodo = useRecoilCallback(({ set }) => (todoID: string) => {
+    set(currentTodo, () => todoID);
   });
   return (
     <li>
-      {todo.description} <button onClick={() => removeTodo(id)}>-</button>
+      <span onClick={() => setCurrentTodo(id)}>{todo.description}</span>{" "}
+      <button onClick={() => removeTodo(id)}>-</button>
     </li>
   );
 };

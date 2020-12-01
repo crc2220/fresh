@@ -1,6 +1,6 @@
 import * as React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { todosIDs, todosFamily } from "../atoms";
+import { todosIDs, todosFamily, inputAtom } from "../atoms";
 import {
   atom,
   useRecoilState,
@@ -8,10 +8,6 @@ import {
   SerializableParam,
 } from "recoil";
 export const Form = () => {
-  const inputAtom = atom({
-    key: "input",
-    default: "",
-  });
   const [inputVal, setInputVal] = useRecoilState(inputAtom);
   const createTodo = useRecoilCallback(
     ({ set }) => (todoID: SerializableParam, description) => {

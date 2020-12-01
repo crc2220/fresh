@@ -9,3 +9,13 @@ export const todosIDs = atom({
   key: "todosIDs",
   default: [],
 });
+
+export const inputAtom = atom({
+  key: "input",
+  default: "",
+});
+
+export const currentTodo = atom({
+  key: "currentTodo",
+  default: "",
+});
