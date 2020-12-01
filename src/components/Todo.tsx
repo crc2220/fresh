@@ -15,7 +15,7 @@ export const Todo = ({ id }: Props) => {
       });
       const _currentTodo = snapshot.getLoadable(currentTodo).contents;
       if (_currentTodo === todoID) {
-        set(currentTodo, (currVal) => null);
+        set(currentTodo, () => null);
       }
     }
   );
