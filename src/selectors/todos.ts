@@ -12,7 +12,6 @@ export const rehydrateTodosSelector = selector({
   key: "rehydrateTodosSelector",
   get: () => {},
   set: ({ set }, todos: any) => {
-    console.log("firing");
     for (let todo of todos) {
       set(todosFamily(todo.id), () => todo);
       set(todosIDs, (currVal) => {
