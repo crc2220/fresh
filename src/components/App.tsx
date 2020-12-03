@@ -6,7 +6,6 @@ import { Form } from "./Form";
 import { Viewer } from "./Viewer";
 import { fifty, box } from "./style";
 export const App = (): JSX.Element => {
-  // rehydrate todos
   useRehydrate();
 
   return (
