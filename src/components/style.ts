@@ -1,14 +1,20 @@
 import * as React from "react";
-export const fifty: React.CSSProperties = {
-  width: "45%",
-  float: "left",
+export const fContainer: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+};
+export const fRow: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "row",
+};
+export const fGrowOne: React.CSSProperties = {
+  flexGrow: 1,
 };
 export const box: React.CSSProperties = {
   border: "1px dashed black",
-  float: "left",
-  width: "100%",
   fontFamily: "Space Mono, serif",
   fontSize: "24px",
+  background: "#6464dc2b",
 };
 
 export const input: React.CSSProperties = {
