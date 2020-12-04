@@ -3,7 +3,8 @@ import { useRehydrate } from "../hooks";
 import { Todos } from "./Todos";
 import { Form } from "./Form";
 import { Viewer } from "./Viewer";
-import { box, fContainer, fRow, fGrowOne } from "./style";
+import { box, fContainer, fRow, fGrowOne, fBasisHalf } from "./style";
+import "./style.css";
 export const App = (): JSX.Element => {
   useRehydrate();
 
@@ -12,10 +13,10 @@ export const App = (): JSX.Element => {
       <h1>Todos</h1>
       <Form />
       <div style={fRow}>
-        <div style={fGrowOne}>
+        <div style={{ ...fGrowOne, ...fBasisHalf }}>
           <Todos />
         </div>
-        <div style={fGrowOne}>
+        <div style={{ ...fGrowOne, ...fBasisHalf }}>
           <Viewer />
         </div>
       </div>

@@ -10,11 +10,13 @@ export const fRow: React.CSSProperties = {
 export const fGrowOne: React.CSSProperties = {
   flexGrow: 1,
 };
+export const fBasisHalf: React.CSSProperties = {
+  flexBasis: "50%",
+};
 export const box: React.CSSProperties = {
   border: "1px dashed black",
   fontFamily: "Space Mono, serif",
   fontSize: "24px",
-  background: "#6464dc2b",
 };
 
 export const input: React.CSSProperties = {
