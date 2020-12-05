@@ -2,7 +2,7 @@ import { atom, atomFamily } from "recoil";
 
 export const todosFamily = atomFamily({
   key: "todos",
-  default: { description: "", id: "" },
+  default: { description: "", id: "", done: false },
 });
 
 export const todosIDs = atom({

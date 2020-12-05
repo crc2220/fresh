@@ -1,4 +1,4 @@
-import { selector, useRecoilValue } from "recoil";
+import { selector } from "recoil";
 import { todosIDs, todosFamily } from "../atoms";
 export const todosSelector = selector({
   key: "todosSelector",

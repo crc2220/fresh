@@ -7,7 +7,7 @@ import { box } from "./style";
 export const Todos = () => {
   const todos = useRecoilValue(todosIDs);
   useEffect(() => {
-    document.title = `${todos.length} todos`;
+    document.title = `${"✅".repeat(todos.length)} ${todos.length} todos`;
   }, [todos]);
   return (
     <ul style={{ ...box, marginTop: "0px" }}>

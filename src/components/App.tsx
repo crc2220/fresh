@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRehydrate } from "../hooks";
 import { Todos } from "./Todos";
 import { Form } from "./Form";
-import { Viewer } from "./Viewer";
+import { Details } from "./Details";
 import { box, fContainer, fRow, fGrowOne, fBasisHalf } from "./style";
 import "./style.css";
 export const App = (): JSX.Element => {
@@ -17,7 +17,7 @@ export const App = (): JSX.Element => {
           <Todos />
         </div>
         <div style={{ ...fGrowOne, ...fBasisHalf }}>
-          <Viewer />
+          <Details />
         </div>
       </div>
     </div>

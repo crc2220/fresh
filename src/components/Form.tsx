@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useEffect, useRef } from "react";
+import { useRecoilState, useRecoilCallback } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { todosIDs, todosFamily, inputAtom } from "../atoms";
 import { todosSelector } from "../selectors";
-import { atom, useRecoilState, useRecoilCallback } from "recoil";
+import { ITodo } from "../types";
 import { box, input, button } from "./style";
 
 export const Form = () => {
@@ -13,10 +14,10 @@ export const Form = () => {
     inputRef.current.focus();
   }, []);
   const createTodo = useRecoilCallback(
-    ({ set, snapshot }) => async (todoID: string, description) => {
+    ({ set, snapshot }) => async (todoID: string, description: string = "") => {
       set(todosIDs, (currVal) => [...currVal, todoID]);
 
-      const newTodo: any = { id: todoID, description };
+      const newTodo: ITodo = { id: todoID, description, done: false };
 
       set(todosFamily(todoID), () => newTodo);
 

@@ -11,6 +11,14 @@ import { pointer } from "./style";
 
 export const Todo = ({ id }: Props) => {
   const todo = useRecoilValue(todosFamily(id));
+
+  // abstract out with other useTodo hooks?
+  const setCurrentTodo = useRecoilCallback(({ set }) => (todoID: string) => {
+    set(currentTodo, () => todoID);
+    localStorage.setItem("currentTodo", JSON.stringify(todoID));
+  });
+
+  // useRemoveTodo
   const removeTodo = useRecoilCallback(
     ({ set, snapshot }) => async (todoID: string) => {
       set(todosIDs, (currVal) => currVal.filter((x) => x !== todoID));
@@ -24,11 +32,32 @@ export const Todo = ({ id }: Props) => {
       localStorage.setItem("todos", JSON.stringify(currTodos));
     }
   );
-  const setCurrentTodo = useRecoilCallback(({ set }) => (todoID: string) => {
-    set(currentTodo, () => todoID);
-  });
+
+  // useToggleTodo
+  const toggleTodo = useRecoilCallback(
+    ({ set, snapshot }) => async (todoID: string) => {
+      set(todosFamily(todoID), (todo) => {
+        return { ...todo, done: !todo.done };
+      });
+      let currTodos = await snapshot.getPromise(todosSelector);
+      currTodos = currTodos.map((todo) => {
+        if (todo.id === todoID) {
+          return { ...todo, done: !todo.done };
+        } else {
+          return todo;
+        }
+      });
+      localStorage.setItem("todos", JSON.stringify(currTodos));
+    }
+  );
+
   return (
     <li>
+      <input
+        onClick={() => toggleTodo(id)}
+        type="checkbox"
+        checked={todo.done}
+      />{" "}
       <span style={pointer} onClick={() => setCurrentTodo(id)}>
         {todo.description}
       </span>{" "}
